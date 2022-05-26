@@ -1,0 +1,57 @@
+﻿@model crown.Models.UrltoHtmlModel
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-header">
+                    <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>Tambah Dokumen dari Repositori Online
+                </div>
+                <div class="card-body">
+                    Informasi : @ViewBag.desc
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="description">Deskripsi Dokumen</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="description">Jenis Dokumen</label>
+                                <div class="col-md-10">
+                                    @Html.DropDownList("archiveTypeID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.archiveTypeID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                URL Dokumen (Pastikan URL Disetting Publik)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.url, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.url, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @Html.HiddenFor(model => model.timelineItemID, new { Value = ViewBag.timelineID })
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Tambah Dokumen" class="mb-2 mr-2 border-0 btn-transition btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+                @*@section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }*@

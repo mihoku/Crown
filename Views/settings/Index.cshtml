@@ -1,0 +1,47 @@
+﻿@model IEnumerable<crown.Models.theme>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate pe-7s-settings"> </i>@ViewBag.Title
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("themes","settings",null)"><i class="pe-7s-global"> </i></a>
+                            <a href="@Url.Action("themes","settings",null)"><p>Klaisifikasi Tema</p></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("index","docutype",null)"><i class="pe-7s-file"> </i></a>
+                            <a href="@Url.Action("index","docutype",null)"><p>Jenis Dokumen</p></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("index","archives",null)"><i class="pe-7s-folder"> </i></a>
+                            <a href="@Url.Action("index","archives",null)"><p>Lihat Arsip</p></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("index","sub",null)"><i class="pe-7s-bookmarks"> </i></a>
+                            <a href="@Url.Action("index","sub",null)"><p>Kelola Subtema</p></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("monitoring","themes",null)"><i class="pe-7s-monitor"> </i></a>
+                            <a href="@Url.Action("monitoring","themes",null)"><p>Rekapitulasi Dokumentasi</p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

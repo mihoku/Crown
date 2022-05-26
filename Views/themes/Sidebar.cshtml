@@ -1,0 +1,23 @@
+﻿@model IEnumerable<crown.Models.theme>
+
+    <ul class="vertical-nav-menu">
+        <li>
+            <a href="@Url.Action("Index","Home",null)">
+                <i class="metismenu-icon pe-7s-home"></i>
+                Kebijakan Umum
+            </a>
+        </li>
+        @foreach (var item in Model)
+        {
+            <li class="app-sidebar__heading">@item.name</li>
+            foreach (var subitem in item.subTheme.ToList())
+            {
+                <li>
+                    <a href="@Url.Action("Display","themes", new { id=subitem.ID })">
+                        <i class="metismenu-icon @subitem.icons"></i>
+                        @subitem.name
+                    </a>
+                </li>
+            }
+        }
+    </ul>

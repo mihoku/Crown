@@ -1,0 +1,186 @@
+﻿@model crown.Models.timelineItem
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate pe-7s-info"> </i> @Model.Title 
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        @Html.Raw(Model.Contents)
+                        <br />
+                        @if (ViewBag.isAdmin)
+                        {
+                            if (Model.isGeneral)
+                            {
+                                <button class="mb-2 mr-2 btn btn-success"><i class="pe-7s-star"></i> Informasi Kebijakan Umum</button> <a href="@Url.Action("RemoveGeneral","themes", new { id=Model.ID })"><span class="badge badge-light"><i class="pe-7s-close-circle"></i></span></a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("SetGeneral","themes", new { id=Model.ID })"><button class="mb-2 mr-2 btn btn-light"><i class="pe-7s-star"></i> Tambahkan sebagai Informasi Kebijakan Umum</button></a>
+                            }
+                        }
+                        else
+                        {
+                            if (Model.isGeneral)
+                            {
+                                <button class="mb-2 mr-2 btn btn-success"><i class="pe-7s-star"></i> Informasi Kebijakan Umum</button>
+                            }
+                        }
+                    </div>
+                    <div class="col-md-2">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("Index","Home",null)"><i class="pe-7s-angle-left-circle"> </i></a>
+                            <a href="@Url.Action("Index","Home",null)"><p>Kembali</p></a>
+                        </div>
+                        @if (ViewBag.isAdmin)
+                        {
+                            <div class="font-icon-wrapper">
+                                <a href="@Url.Action("Amend",new { id=Model.ID })"><i class="pe-7s-edit"> </i></a>
+                                <a href="@Url.Action("Amend",new { id=Model.ID })"><p>Edit</p></a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate pe-7s-bookmarks"> </i> Kategori Informasi
+            </div>
+            <div class="card-body">
+                @if (ViewBag.isAdmin)
+                {
+                    Html.RenderAction("spillCategory", "themes", new { id = Model.ID });
+                }
+
+                else
+                {
+                    if (Model.subThemeItem.Count() != 0)
+                    {
+                        foreach (var item in Model.subThemeItem)
+                        {
+                            <div class="mb-2 mr-2 badge badge-pill badge-info"><a href="@Url.Action("Display","themes",new { id=item.subThemeID })" style="color:#fff!important;">@item.subTheme.name</a></div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="mb-2 mr-2 badge badge-pill badge-info">No Categories</div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+    <li class="nav-item">
+        <a role="tab" class="nav-link active" id="tab-0" data-toggle="tab" href="#tab-content-0">
+            <span>Informasi Detail</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a role="tab" class="nav-link" id="tab-1" data-toggle="tab" href="#tab-content-1">
+            <span>Dokumen Sumber</span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-card mb-3 card">
+                        <div class="card-header">
+                            <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>Daftar Informasi Detail
+                        </div>
+                        <div class="card-body">
+                            @if (ViewBag.isAdmin)
+                            {
+                                <center>
+                                    <a href="@Url.Action("Creates", new { id = Model.ID })" class="mb-2 mr-2 border-0 btn-transition btn btn-info"><i class="pe-7s-plus"></i> Tambah Informasi Detail</a>
+                                    <br /><br />
+                                </center>
+                            }
+                            @if (Model.timelineDetails.Count() != 0)
+                            {
+                                foreach (var item in Model.timelineDetails)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="main-card mb-3 card card-border border-secondary">
+                                                <div class="card-header text-dark bg-white">
+                                                    <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@item.Title
+                                                </div>
+                                                <div class="card-body">
+                                                    @Html.Raw(item.Contents)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>Belum tersedia informasi detail yang dapat ditampilkan.</p>
+                                <br /><br />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="tab-pane tabs-animation fade show" id="tab-content-1" role="tabpanel">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-card mb-3 card">
+                    <div class="card-header">
+                        <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>Daftar Dokumen Sumber
+                    </div>
+                    <div class="card-body">
+                        @if (ViewBag.isAdmin)
+                        {
+                            <center>
+                                <a href="@Url.Action("source", new { id = Model.ID })" class="mb-2 mr-2 border-0 btn-transition btn btn-info"><i class="pe-7s-plus"></i> Tambah Dokumen Sumber Referensi</a>
+                                <br /><br />
+                            </center>
+                        }
+                        <table class="mb-0 table table-hover datatable">
+                            <thead>
+                                <tr>
+                                    <th>Jenis Dokumen</th>
+                                    <th>Nama Dokumen</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var docs in Model.archiveItem)
+                                {
+                                <tr>
+                                    <td>@docs.archive.archiveType.description</td>
+                                    <td>@docs.archive.description</td>
+                                    @if (docs.archive.savedInOnlineRepository)
+                                    {
+                                        <td><a target="_blank" href="@docs.archive.origin" class="mb-2 mr-2 btn-transition btn btn-outline-success"><i class="pe-7s-download"></i> Download</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td><a target="_blank" href="~/Documents/@docs.archive.fileName" class="mb-2 mr-2 btn-transition btn btn-outline-success"><i class="pe-7s-download"></i> Download</a></td>
+                                    }
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

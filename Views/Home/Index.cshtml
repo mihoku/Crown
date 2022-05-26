@@ -1,0 +1,79 @@
+﻿@model IEnumerable<crown.Models.timelineItem>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate pe-7s-info"> </i> @ViewBag.Title
+            </div>
+            <div class="card-body">
+                @if (ViewBag.isAdmin)
+                {
+                    <a href="@Url.Action("InfoAdd","themes",null)" class="mb-2 mr-2 border-0 btn btn-info"><i class="pe-7s-plus"></i> &nbsp; Tambah Informasi</a><br /><br />
+                }
+                <div class="timeline">
+                    @for (var year = DateTime.Now.Year; year > 2008; year--)
+                    {
+                        if (Model.Where(y => y.EventDate.Year == year).Count() != 0)
+                        {
+                            for (var i = 12; i > 0; i--)
+                            {
+                                if (Model.Where(y => y.EventDate.Month == i && y.EventDate.Year == year).Count() != 0)
+                                {
+                                    var mo = new DateTime(year, i, 1);
+                                    <h2>@mo.ToString("MMM-yyyy")</h2>
+
+                                    foreach (var item in Model.Where(y => y.EventDate.Month == i && y.EventDate.Year == year).OrderBy(y => y.EventDate))
+                                    {
+                                        <ul class="timeline-items">
+                                            @if (item.EventDate.Day % 2 != 0)
+                                            {
+                                                <li class="is-hidden timeline-item">
+                                                    <!-- Normal block, positionned to the left -->
+                                                    <div class="date-left">
+                                                        <p class="tanggal p-3">@item.EventDate.ToLongDateString()</p>
+                                                    </div>
+                                                    <br>
+                                                    <div class="body tl-kiri" style="color: black;">
+                                                        <div class="timelinebox-left">
+                                                            <div class="card-body">
+                                                                <p style="font-weight: 800">@item.Title</p>
+                                                                <p style="color:#000; margin-bottom:0px;">@Html.Raw(item.Contents)</p>
+                                                                <br />
+                                                                <a href="@Url.Action("Detail", "themes", new { id = item.ID })" class="mb-2 mr-2 border-0 btn-transition btn btn-outline-info">Lihat Selengkapnya</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="is-hidden timeline-item inverted">
+                                                    <!-- Normal block, positionned to the right  -->
+                                                    <div class="date-right">
+                                                        <p class="tanggal p-3">@item.EventDate.ToLongDateString()</p>
+                                                    </div>
+                                                    <br>
+                                                    <div class="body tl-kanan" style="color: black;">
+                                                        <div class="timelinebox-right">
+                                                            <div class="card-body">
+                                                                <p style="font-weight: 800">@item.Title</p>
+                                                                <p style="color:#000; margin-bottom:0px;"> @Html.Raw(item.Contents)</p>
+                                                                <br />
+                                                                <a href="@Url.Action("Detail", "themes", new { id = item.ID })" class="mb-2 mr-2 border-0 btn-transition btn btn-outline-info">Lihat Selengkapnya</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

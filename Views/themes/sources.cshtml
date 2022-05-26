@@ -1,0 +1,37 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate pe-7s-info"> </i>@ViewBag.Title
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("Reference","archives",new { id=ViewBag.themeID })"><i class="pe-7s-folder"> </i></a>
+                            <a href="@Url.Action("Reference","archives",new { id=ViewBag.themeID })"><p>Select from Archive</p></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("Upload","archives",new { id=ViewBag.themeID })"><i class="pe-7s-file"> </i></a>
+                            <a href="@Url.Action("Upload","archives",new { id=ViewBag.themeID })"><p>Upload Document File</p></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("FromURL","archives",new { id=ViewBag.themeID })"><i class="pe-7s-global"> </i></a>
+                            <a href="@Url.Action("FromURL","archives",new { id=ViewBag.themeID })"><p>Generate from Webpage</p></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="font-icon-wrapper">
+                            <a href="@Url.Action("FromOnlineRepo","archives",new { id=ViewBag.themeID })"><i class="pe-7s-server"> </i></a>
+                            <a href="@Url.Action("FromOnlineRepo","archives",new { id=ViewBag.themeID })"><p>Add from Online Repo</p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

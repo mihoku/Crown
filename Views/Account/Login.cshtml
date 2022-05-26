@@ -1,0 +1,103 @@
+﻿@using crown.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LayoutIdentity.cshtml";
+}
+
+<header>
+    <span class="avatar"><img src="~/Contents/icon-big-blue.png" alt="" style="background-color:#ffffff;width:130px!important;height:130px!important" /></span>
+    <h1>Login</h1>
+    <p>CROWN</p>
+</header>
+
+<hr />
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="text-danger">
+        @ViewBag.Message
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="field">
+        @Html.TextBoxFor(m => m.Email, new { placeholder = "Username", autofocus = "true", type = "email" })
+    </div>
+    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+    <div class="field">
+        @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+    </div>
+    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+    @*<div class="field">
+            @Html.CheckBoxFor(m => m.RememberMe)<label for="human">Remember Me</label>
+        </div>*@
+
+    <ul class="actions">
+        <li><input class="button fit" type="submit" name="Login" value="Login"></li>
+        <li><a href="@Url.Action("ForgotPassword","Account",null)" class="button fit">Forgot Password</a></li>
+    </ul>
+}
+<!--<form method="post" action="#">
+    <div class="field">
+        <input type="text" name="name" id="name" placeholder="Name" />
+    </div>
+    <div class="field">
+        <input type="email" name="email" id="email" placeholder="Email" />
+    </div>
+    <div class="field">
+        <div class="select-wrapper">
+            <select name="department" id="department">
+                <option value="">Department</option>
+                <option value="sales">Sales</option>
+                <option value="tech">Tech Support</option>
+                <option value="null">/dev/null</option>
+            </select>
+        </div>
+    </div>
+    <div class="field">
+        <textarea name="message" id="message" placeholder="Message" rows="4"></textarea>
+    </div>
+    <div class="field">
+        <input type="checkbox" id="human" name="human" /><label for="human">I'm a human</label>
+    </div>
+    <div class="field">
+        <label>But are you a robot?</label>
+        <input type="radio" id="robot_yes" name="robot" /><label for="robot_yes">Yes</label>
+        <input type="radio" id="robot_no" name="robot" /><label for="robot_no">No</label>
+    </div>
+    <ul class="actions">
+        <li><a href="#" class="button">Get Started</a></li>
+    </ul>
+</form>-->
+@*<div class="container">
+
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+                {
+        @Html.AntiForgeryToken()
+            <div class="login-wrap">
+                <p class="login-img"><i class="icon_lock_alt"></i></p>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon_profile"></i></span>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder="Email Kemenkeu", autofocus="true" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder="Password" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <label class="checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe) Remember me
+                </label>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+            </div>
+                }
+
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

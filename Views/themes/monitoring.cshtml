@@ -1,0 +1,55 @@
+﻿@model IEnumerable<crown.Models.theme>
+
+@{ 
+ ViewBag.Title = "Monitoring Dokumentasi Kebijakan Pemerintah";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate pe-7s-info"> </i> @ViewBag.Title
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tema Kebijakan
+                            </th>
+                            <th>
+                                Jumlah Informasi
+                            </th>
+                            <th>
+                                Jumlah Dokumen
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="@Url.Action("Index", "Home",null)">Informasi Kebijakan Umum</a></td>
+                            <td>@ViewBag.infoCount</td>
+                            <td>@ViewBag.documentCount</td>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td colspan="3"><b>@item.name</b></td>
+                            </tr>
+                            foreach (var theme in item.subTheme)
+                            {
+                                <tr>
+                                    <td><a href="@Url.Action("Display", "themes", new { id=theme.ID })">@theme.name</a></td>
+                                    <td>@theme.subThemeItem.Count()</td>
+                                    <td>
+                                        @{Html.RenderAction("documentCount", "themes", new { id = theme.ID });}
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<crown.Models.subTheme>
+
+<ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+    <li class="nav-item">
+        <a role="tab" class="nav-link active" id="tab-5" data-toggle="tab" href="#tab-content-5">
+            <span>Kategori</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a role="tab" class="nav-link" id="tab-6" data-toggle="tab" href="#tab-content-6">
+            <span>Tambah Kategori Lain</span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane tabs-animation fade show active" id="tab-content-5" role="tabpanel">
+        @foreach (var item in Model.Where(x => x.subThemeItem.Where(y => y.timelineItemID == ViewBag.itemID).Count() != 0))
+        {
+            <div class="mb-2 mr-2 badge badge-pill badge-info"><a href="@Url.Action("Display","themes",new { id=item.ID })" style="color:#fff!important;">@item.name</a> <a href="@Url.Action("DeleteCategory","themes",new { id = item.subThemeItem.Where(y=>y.timelineItemID==ViewBag.itemID).First().ID })" style="color:#fff!important"><i class="pe-7s-close-circle"></i></a></div>
+        }
+    </div>
+    <div class="tab-pane tabs-animation fade show" id="tab-content-6" role="tabpanel">
+        @foreach (var item in Model.Where(x => x.subThemeItem.Where(y => y.timelineItemID == ViewBag.itemID).Count() == 0))
+        {
+            <div class="mb-2 mr-2 badge badge-pill badge-secondary"><a href="@Url.Action("AddCategory","themes",new { id=item.ID, timeline = ViewBag.itemID })" style="color:#fff!important;">@item.name <i class="pe-7s-plus"></i></a></div>
+        }
+    </div>
+</div>
+    @*@foreach (var item in Model)
+    {
+        if (item.subThemeItem.Where(y => y.timelineItemID == ViewBag.itemID).Count() != 0)
+        {
+
+        }
+        else
+        {
+
+        }
+    }*@
+

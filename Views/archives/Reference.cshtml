@@ -1,0 +1,37 @@
+﻿@model IEnumerable<crown.Models.archive>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-header">
+                    <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>Tambah Dokumen dari URL
+                </div>
+                <div class="card-body">
+                    Informasi : @ViewBag.desc
+                    <table class="mb-0 table table-hover datatable">
+                        <thead>
+                            <tr>
+                                <th>Jenis Dokumen</th>
+                                <th>Nama Dokumen</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @foreach (var docs in Model)
+                                {
+                                    <tr>
+                                        <td>@docs.archiveType.description</td>
+                                        <td>@docs.description</td>
+                                        <td><a href="@Url.Action("Select",new { id=docs.ID,item=ViewBag.timelineID })" class="mb-2 mr-2 btn-transition btn btn-outline-success"><i class="pe-7s-up-arrow"></i> Select Document</a></td>
+                                    </tr>
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                @*@section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }*@

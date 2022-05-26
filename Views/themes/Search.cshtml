@@ -1,0 +1,39 @@
+﻿@model IEnumerable<crown.Models.timelineItem>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate pe-7s-info"> </i> @ViewBag.Title
+            </div>
+            <div class="card-body">
+                @if (Model.Count() != 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card card-border border-secondary">
+                                    <div class="card-header text-dark bg-white">
+                                        <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@item.Title
+                                    </div>
+                                    <div class="card-body">
+                                        @Html.Raw(item.Contents)
+                                        <br /><br />
+                                        <a href="@Url.Action("Detail","themes",new { id=item.ID })" class="mb-2 mr-2 border-0 btn-transition btn btn-outline-info">Lihat Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <br /><br />
+                    <center>Tidak ditemukan hasil pencarian yang sesuai</center>
+                    <br /><br />
+                }
+            </div>
+        </div>
+    </div>
+</div>

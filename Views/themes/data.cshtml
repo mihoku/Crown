@@ -1,0 +1,20 @@
+﻿@if (ViewBag.code == "PDN")
+{
+    <center><h5>Kinerja Penempatan Dana pada Bank Himbara (per 14 Agustus 2020)</h5> <br /><img src="~/Contents/PDN.png" width="90%" /><br /><br /><img src="~/Contents/PDN2.png" width="90%" /></center>
+}
+else if (ViewBag.code == "PJMUMKM")
+{
+    <center><h5>Progress Penjaminan Kredit UMKM per Sektor Usaha (per 5 Agustus 2020)</h5> <br /><img src="~/Contents/PJMUMKM.png" width="90%" /></center>
+}
+else if (ViewBag.code == "JKN")
+{
+    <center><h5>Realisasi Penyaluran Bantuan Iuran BPJS</h5> <br /><img src="~/Contents/JKN.png" width="90%" /></center>
+}
+else if (ViewBag.code == "KPK")
+{
+    <center><img src="~/Contents/KPK.png" width="90%" /></center>
+}
+else
+{
+    <center>Belum tersedia data untuk divisualisasikan</center>
+}

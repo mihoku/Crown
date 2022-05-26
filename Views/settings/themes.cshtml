@@ -1,0 +1,44 @@
+﻿@model IEnumerable<crown.Models.theme>
+
+@{
+    ViewBag.Title = "Kelola Tema Kebijakan Pemerintah";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate pe-7s-info"> </i> @ViewBag.Title
+            </div>
+            <div class="card-body">
+                <p>
+                    @Html.ActionLink("Tambahkan Tema Kebijakan Baru", "Create")
+                </p>
+                <table class="table table-bordered table-striped table-hover">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.name)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
